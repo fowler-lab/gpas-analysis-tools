@@ -1,14 +1,13 @@
-# pathogena-build-tables
-CLI to build CRyPTIC data tables from the outputs of EIT Pathogena
+# gpas-build-tables
+CLI to build CRyPTIC data tables from the outputs of GPAS
 
-Philip Fowler, 20 January 2025
+Philip Fowler, 11 March 2026
 
 
 Notes
 
 1. `build-tables` should not modify the data fields and be able to cope with either JSON or CSV files downloaded from Pathogena. The glob should be recursive to deal with a sharded file system
 2. `shard-files` takes a delimiter (for CRyPTIC this is `.`) and moves the output files into a sharded file system
-3. 
 
 Issues
 
