@@ -6,8 +6,9 @@ Philip Fowler, 11 March 2026
 
 Notes
 
-1. `build-tables` should not modify the data fields and be able to cope with either JSON or CSV files downloaded from Pathogena. The glob should be recursive to deal with a sharded file system
-2. `shard-files` takes a delimiter (for CRyPTIC this is `.`) and moves the output files into a sharded file system
+1. `build-tables` should not modify the data fields and be able to cope with either JSON or CSV files downloaded from GPAS. The glob should be recursive to deal with a sharded file system
+2. `correct-tables`. This is a separate command that takes the output of `build-tables` and joins `mutations` to `variants` to pick up some useful genetics metrics.
+3. `shard-files` takes a delimiter (for CRyPTIC this is `.`) and moves the output files into a sharded file system (not yet implemented)
 
 Issues
 
