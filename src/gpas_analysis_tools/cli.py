@@ -144,7 +144,7 @@ def build_tables(
     max_samples: int = None,
     output: str = None,
     uppercase: bool = True,
-    named_run_accession: bool = True,
+    named_run_accession: bool = False,
     filename: str = None,
     chunks: int = 100,
 ):
@@ -168,9 +168,9 @@ def build_tables(
         tables = []
         n_samples = 0
 
-        n_files = sum(1 for i in (path).rglob("*" + filename + ".csv"))
+        n_files = sum(1 for i in (path).rglob("*" + filename + "*.csv"))
 
-        for i in tqdm((path).rglob("*" + filename + ".csv"), total=n_files):
+        for i in tqdm((path).rglob("*" + filename + "*.csv"), total=n_files):
 
             df = pandas.read_csv(i)
 
@@ -185,8 +185,9 @@ def build_tables(
                 ].index.values[0]
                 df["uniqueid"] = uid
             else:
-                uid = i.stem.split("." + filename)[0]
+                uid = i.stem.split("_")[0]
                 df["uniqueid"] = uid
+
             master_table.at[uid, "has_" + filename] = True
             tables.append(df)
 
@@ -366,15 +367,15 @@ def build_tables(
         tables = []
         n_samples = 0
 
-        for i in tqdm((path).rglob("*main_report.json")):
+        for i in tqdm((path).rglob("*main_report*.json")):
 
             if named_run_accession:
-                ena_run_accession = i.stem.split(".main_report")[0]
+                ena_run_accession = i.stem.split("_")[0]
                 uid = master_table[
                     master_table.run_accession == ena_run_accession
                 ].index.values[0]
             else:
-                uid = i.stem.split(".main_report")[0]
+                uid = i.stem.split("_")[0]
 
             master_table.at[uid, "has_genome"] = True
 
