@@ -250,4 +250,9 @@ def build_genetics_table(filename, data_path, tables_path, master_table, max_sam
         df.to_csv(str(tables_path / filename.upper()) + ".csv", index=True)
         df.to_parquet(str(tables_path / filename.upper()) + ".parquet")
 
+    with pandas.option_context("future.no_silent_downcasting", True):
+        species_table = species_table.fillna(value = {
+                "has_" + filename: False
+                }).infer_objects(copy=False)
+
     return species_table
