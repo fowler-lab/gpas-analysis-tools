@@ -35,7 +35,7 @@ def split_species(row):
     species = cols[0]
     return species
 
-def get_species_number(data):
+def get_species_number(data, uid):
     # let's get a list of the mapped species names
     #  we assume here that if it doesn't have a new block there will be only one species!
     has_new_block = False
@@ -43,7 +43,8 @@ def get_species_number(data):
         species_number = len(data['Assembled NTM Results']['Assembled Species'])
         has_new_block = True
     else:
-        assert len(data['Mycobacterium Results']['Species']) == 1, f"Expected only one species for {uid} but found {len(data['Mycobacterium Results']['Species'])}"
+        if len(data['Mycobacterium Results']['Species']) != 1:
+            print(f"Expected only one species but found {len(data['Mycobacterium Results']['Species'])} for {uid}")
         species_number = 1
 
     return (species_number, has_new_block)
@@ -125,7 +126,7 @@ def build_species_table(data_path = None,
         pipeline_build = data["Metadata"]["Pipeline build"].replace("\n", "")
         master_table.at[uid, "GPAS_PIPELINE_BUILD"] = pipeline_build
 
-        number_species, has_new_block = get_species_number(data)
+        number_species, has_new_block = get_species_number(data, uid)
         master_table.at[uid, "has_new_block_in_main_report"] = has_new_block
         master_table.at[uid, "number_of_species"] = number_species
 
@@ -163,12 +164,12 @@ def build_species_table(data_path = None,
             "SUBLINEAGE",
         ],
     )
-    SPECIES[['SPECIES_NAME', 'SUBSPECIES', 'LINEAGE', 'SUBLINEAGE']] = SPECIES.apply(tidy_species, axis=1)
+    SPECIES[['SPECIES_NAME', 'SUBSPECIES_NAME', 'LINEAGE', 'SUBLINEAGE']] = SPECIES.apply(tidy_species, axis=1)
     SPECIES.drop(columns=['MAPPED_SPECIES'], inplace=True)
-    SPECIES = SPECIES[['RUN_ACCESSION', 'SPECIES_NAME', 'SUBSPECIES', 'LINEAGE', 'SUBLINEAGE','N_READS', 'COVERAGE', 'DEPTH',  ]]
+    SPECIES = SPECIES[['RUN_ACCESSION', 'SPECIES_NAME', 'SUBSPECIES_NAME', 'LINEAGE', 'SUBLINEAGE','N_READS', 'COVERAGE', 'DEPTH',  ]]
     SPECIES['RUN_ACCESSION'] = SPECIES.apply(tidy_uid, axis=1)
 
-    for col in ['SPECIES_NAME', 'SUBSPECIES', 'LINEAGE', 'SUBLINEAGE',]:
+    for col in ['SPECIES_NAME', 'SUBSPECIES_NAME', 'LINEAGE', 'SUBLINEAGE',]:
         SPECIES[col] = SPECIES[col].astype("category")
     for col in ['N_READS']:
         SPECIES[col] = SPECIES[col].astype("Int64")

@@ -95,8 +95,6 @@ def build_genetics_table(filename, data_path, tables_path, master_table, max_sam
 
     for i in tqdm((data_path).rglob("*" + filename + "*.csv"), total=n_files):
 
-        df = pandas.read_csv(i)
-
         n_samples += 1
         if max_samples is not None and n_samples > max_samples:
             break
@@ -107,6 +105,12 @@ def build_genetics_table(filename, data_path, tables_path, master_table, max_sam
 
         # let's check the uid is at least in the master_table!
         assert uid in master_table.index, f"UID {uid} not found in master table"
+        
+        if not master_table.at[uid, "has_main_report"]:
+            print(f"UID {uid} does not have main report, skipping")
+            continue
+
+        df = pandas.read_csv(i)
         
         # check to see if the same has the 'Assembled NTM Results' block in the main report
         if master_table.at[uid, 'has_new_block_in_main_report']:
