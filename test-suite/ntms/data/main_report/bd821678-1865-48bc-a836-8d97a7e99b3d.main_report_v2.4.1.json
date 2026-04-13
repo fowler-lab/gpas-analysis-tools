@@ -1,0 +1,60 @@
+{
+    "Pipeline Outcome": "Mycobacterial species identified. Reads mapped to M. tuberculosis (H37Rv v3) too low to proceed to M. tuberculosis complex genome assembly.",
+    "Organism Identification": {
+        "Human Reads": null,
+        "Unclassified Reads": 17466,
+        "Non-Mycobacterium Bacteria Reads": 0,
+        "Mycobacterium Reads": 2564882
+    },
+    "Mycobacterium Results": {
+        "Summary": [
+            {
+                "Name": "Mycobacterium abscessus",
+                "Num Reads": 2432683,
+                "Coverage": 99.00906274628517,
+                "Depth": 42.17491209944188
+            }
+        ],
+        "Species": [
+            {
+                "Name": "Mycobacterium abscessus",
+                "Num Reads": 2432683,
+                "Coverage": 99.00906274628517,
+                "Mean Depth": 42.17491209944188,
+                "Length": 5090491
+            }
+        ],
+        "Phylogenic Group": [
+            {
+                "Name": "Non_tuberculosis_mycobacterium_complex",
+                "Coverage": 99.866,
+                "Median Depth": 33
+            }
+        ],
+        "Subspecies": [
+            {
+                "Name": "Mycobacterium_abscessus",
+                "Coverage": 99.866,
+                "Median Depth": 33
+            }
+        ],
+        "Lineage": [
+            {
+                "Name": "Mycobacterium_abscessus_subsp._abscessus",
+                "Coverage": 99.833,
+                "Median Depth": 32
+            }
+        ]
+    },
+    "Genomes": null,
+    "Metadata": {
+        "Pipeline build": "68d0e6f",
+        "Reference Data Files": {
+            "manifest": "manifest_20251022.fasta.gz",
+            "species_list": "contigs_20251121.csv",
+            "name_mapping": "competitive_mapping_mykrobe_names_20241105.csv",
+            "tb_amr_cat": "NC_000962.3_WHO-UCN-TB-2023.5_v2.1_GARC1_RFUS.csv",
+            "rundial_ref": "h37rv_20231215.fa.gz"
+        }
+    }
+}
