@@ -1,0 +1,7 @@
+batch_name,GPAS_PIPELINE_VERSION,RUN_ACCESSION,remote_sample_name,remote_batch_name,remote_batch_id
+TB test batch,2.4.1,SRR6981952,0908e4b9-fa2e-4832-b864-58b6e23b53b6,0f0zao,c5bfc0fe-c5ad-48c2-836e-e430d42cf129
+TB test batch,2.4.1,SRR6982035,0f098bfb-f479-4bbe-a5b8-7c607147b475,0f0zao,c5bfc0fe-c5ad-48c2-836e-e430d42cf129
+trial4-mycobacterium-abscessus_batch_51,2.4.1,bd821678-1865-48bc-a836-8d97a7e99b3d,e2375fb6-a3fe-49bc-8b17-6cdb0d8e9ecb,0pqwzx,00e3f459-d6a8-4f6d-a9ba-abd210f6b8d5
+mixture-test,2.4.1,77434f41-625f-424a-97c5-8d318ce11410,77434f41-625f-424a-97c5-8d318ce11410,8oruua,48f94831-7896-4127-bfd1-2ce5c5a034e9
+trial4-mycobacterium-avium_batch_42,2.4.1,05c9ed42-e452-48d9-bee8-993320c428e8,562ab3e6-b0a7-4b5c-8545-4e287257e4c8,0cwucm,8e3c060b-9d43-48da-a9a0-ddd16eba6044
+trial4-mycobacterium-avium_batch_42,2.4.1,05f52b1f-5762-4b0a-9f57-2c5c268b5472,47bb4d52-e76b-4ee6-96f1-2391b15983a8,0cwucm,8e3c060b-9d43-48da-a9a0-ddd16eba6044
