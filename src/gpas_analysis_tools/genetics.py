@@ -6,6 +6,10 @@ from tqdm import tqdm
 
 tqdm.pandas()
 
+from pandarallel import pandarallel
+
+pandarallel.initialize(progress_bar=False, nb_workers=16)
+
 def parse_variants(row):
 
     variant = row.variant
@@ -188,7 +192,7 @@ def build_genetics_table(filename, data_path, tables_path, master_table, max_sam
                     "minor_reads",
                     "coverage",
                 ]
-            ] = df_i.apply(parse_variants, axis=1)
+            ] = df_i.parallel_apply(parse_variants, axis=1)
             df_i.drop(columns=["variant"], inplace=True)
             df_i.rename(columns={"var": "variant"}, inplace=True)
             for col in [
@@ -226,7 +230,7 @@ def build_genetics_table(filename, data_path, tables_path, master_table, max_sam
         for df_i in tqdm(numpy.array_split(df, chunks)):
             df_i[
                 ["mut", "is_null", "is_minor", "minor_mutation", "minor_reads"]
-            ] = df_i.apply(parse_mutations, axis=1)
+            ] = df_i.parallel_apply(parse_mutations, axis=1)
             df_i.drop(columns=["mutation"], inplace=True)
             df_i.rename(columns={"mut": "mutation"}, inplace=True)
             for col in [
