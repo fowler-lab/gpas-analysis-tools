@@ -227,6 +227,7 @@ def build_genetics_table(filename, data_path, tables_path, master_table, max_sam
 
     elif filename == "mutations":
         tables = []
+        print('starting to parse mutations, this may take a while...')
         for df_i in tqdm(numpy.array_split(df, chunks)):
             df_i[
                 ["mut", "is_null", "is_minor", "minor_mutation", "minor_reads"]

@@ -1,0 +1,16 @@
+UNIQUEID,SPECIES_NAME,CATALOGUE_NAME,CATALOGUE_VERSION,CATALOGUE_VALUES,DRUG,PREDICTION
+final,Mycobacterium tuberculosis,WHO-UCN-GTB-PCI-2023.5,2.0,RFUS,MXF,S
+final,Mycobacterium tuberculosis,WHO-UCN-GTB-PCI-2023.5,2.0,RFUS,LEV,S
+final,Mycobacterium tuberculosis,WHO-UCN-GTB-PCI-2023.5,2.0,RFUS,DLM,S
+final,Mycobacterium tuberculosis,WHO-UCN-GTB-PCI-2023.5,2.0,RFUS,RIF,R
+final,Mycobacterium tuberculosis,WHO-UCN-GTB-PCI-2023.5,2.0,RFUS,BDQ,S
+final,Mycobacterium tuberculosis,WHO-UCN-GTB-PCI-2023.5,2.0,RFUS,CFZ,S
+final,Mycobacterium tuberculosis,WHO-UCN-GTB-PCI-2023.5,2.0,RFUS,STM,R
+final,Mycobacterium tuberculosis,WHO-UCN-GTB-PCI-2023.5,2.0,RFUS,LZD,U
+final,Mycobacterium tuberculosis,WHO-UCN-GTB-PCI-2023.5,2.0,RFUS,AMI,S
+final,Mycobacterium tuberculosis,WHO-UCN-GTB-PCI-2023.5,2.0,RFUS,CAP,S
+final,Mycobacterium tuberculosis,WHO-UCN-GTB-PCI-2023.5,2.0,RFUS,KAN,S
+final,Mycobacterium tuberculosis,WHO-UCN-GTB-PCI-2023.5,2.0,RFUS,INH,R
+final,Mycobacterium tuberculosis,WHO-UCN-GTB-PCI-2023.5,2.0,RFUS,ETH,R
+final,Mycobacterium tuberculosis,WHO-UCN-GTB-PCI-2023.5,2.0,RFUS,PZA,R
+final,Mycobacterium tuberculosis,WHO-UCN-GTB-PCI-2023.5,2.0,RFUS,EMB,R

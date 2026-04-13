@@ -1,0 +1,7 @@
+RUN_ACCESSION,SPECIES_NAME,SUBSPECIES_NAME,LINEAGE,SUBLINEAGE,N_READS,COVERAGE,DEPTH,has_predictions,has_effects
+05c9ed42-e452-48d9-bee8-993320c428e8,Mycobacterium avium,Mycobacterium avium subsp. hominissuis,,,876374,93.65,24.4945,False,False
+77434f41-625f-424a-97c5-8d318ce11410,Mycobacterium intracellulare,Mycobacterium intracellulare subsp. intracellulare,,,1806529,93.0141,45.4026,False,False
+77434f41-625f-424a-97c5-8d318ce11410,Mycobacterium avium,,,,217986,90.6699,5.93603,False,False
+SRR6982035,Mycobacterium tuberculosis,Mycobacterium tuberculosis,lineage4,lineage4.3.2.1,55033,78.0879,2.07745,False,False
+SRR6981952,Mycobacterium tuberculosis,Mycobacterium tuberculosis,lineage4,lineage4.3.3,1316132,99.1121,79.1129,True,True
+bd821678-1865-48bc-a836-8d97a7e99b3d,Mycobacterium abscessus,Mycobacterium abscessus subsp. abscessus,,,2432683,99.00906274628517,42.17491209944188,False,False
