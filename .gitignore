@@ -171,3 +171,7 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Exceptions
+
+!test-suite/ntms/walkthrough-tables.ipynb
