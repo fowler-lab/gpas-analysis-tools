@@ -233,7 +233,8 @@ def build_genetics_table(
             ]:
                 df_i[col] = df_i[col].astype("category")
 
-            df_i = df_i.rename(columns=str.upper)
+            df_i.columns = df_i.columns.str.upper()
+
             df_i.set_index(
                 ["RUN_ACCESSION", "SPECIES_NAME", "GENE", "VARIANT"], inplace=True
             )
@@ -282,7 +283,7 @@ def build_genetics_table(
             ]:
                 df_i[col] = df_i[col].astype("category")
 
-            df_i = df_i.rename(columns=str.upper)
+            df_i.columns = df_i.columns.str.upper()
             df_i.set_index(
                 ["RUN_ACCESSION", "SPECIES_NAME", "GENE", "MUTATION"], inplace=True
             )
