@@ -1,8 +1,7 @@
-import pandas, pathlib, json, numpy, glob
-
+import numpy
+import pandas
+import pathlib
 from tqdm import tqdm
-
-from collections import defaultdict
 
 from .species import build_species_table
 from .genetics import build_genetics_table
@@ -16,10 +15,9 @@ def split_species(row):
     return species
 
 
-
-
-def correct_tables(input_dir: str = ".", output_name: str = "MUTATIONS_CORRECTED.parquet"):
-
+def correct_tables(
+    input_dir: str = ".", output_name: str = "MUTATIONS_CORRECTED.parquet"
+):
     input = pathlib.Path(input_dir)
 
     print("reading the VARIANTS dataframe")
@@ -57,25 +55,31 @@ def correct_tables(input_dir: str = ".", output_name: str = "MUTATIONS_CORRECTED
 
     print("writing the new MUTATIONS dataframe to disc")
     mutations.reset_index(inplace=True)
-    mutations.set_index(["RUN_ACCESSION", "SPECIES_NAME", "GENE", "MUTATION"], inplace=True)
+    mutations.set_index(
+        ["RUN_ACCESSION", "SPECIES_NAME", "GENE", "MUTATION"], inplace=True
+    )
     mutations.to_parquet(output_name)
 
 
- 
-
 def build_tables(
-    lookup_table: str = None,
+    lookup_table: str | None = None,
     source_files: str = "data/",
-    max_samples: int = None,
-    output: str = None,
-    tablename: str = None,
+    max_samples: int | None = None,
+    output: str | None = None,
+    tablename: str | None = None,
     chunks: int = 1,
 ):
+    if lookup_table is None:
+        print("No lookup table provided, exiting.")
+        return
     master_file = pathlib.Path(lookup_table)
     master_table = pandas.read_csv(master_file)
     master_table.set_index("RUN_ACCESSION", inplace=True)
 
     data_path = pathlib.Path(source_files)
+    if output is None:
+        print("No output path provided, exiting.")
+        return    
     tables_path = pathlib.Path(output)
 
     assert tablename in [
@@ -87,15 +91,19 @@ def build_tables(
     ], "can only specify one from this list"
 
     if tablename == "species":
-        
-        master_table = build_species_table(data_path, tables_path, master_table, max_samples)
-      
+        master_table = build_species_table(
+            data_path, tables_path, master_table, max_samples
+        )
+
         master_table.to_csv(tables_path / (master_file.stem + ".csv"), index=True)
-        master_table.to_parquet(tables_path / (master_file.stem + ".parquet"), index=True)
+        master_table.to_parquet(
+            tables_path / (master_file.stem + ".parquet"), index=True
+        )
 
     if tablename in ["effects", "mutations", "predictions", "variants"]:
-
-        species_table = build_genetics_table(tablename, data_path, tables_path, master_table, max_samples, chunks, False)
+        species_table = build_genetics_table(
+            tablename, data_path, tables_path, master_table, max_samples, chunks, False
+        )
 
         species_table.to_csv(tables_path / "SPECIES.csv", index=True)
         species_table.to_parquet(tables_path / "SPECIES.parquet")
@@ -107,7 +115,7 @@ def main():
     defopt.run(
         [build_tables, correct_tables],
         no_negated_flags=True,
-        strict_kwonly=False,
+        strict_kwonly="False",
         short={},
     )
 
