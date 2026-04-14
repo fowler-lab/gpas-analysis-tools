@@ -138,26 +138,25 @@ def build_genetics_table(
             print(f"UID {uid} does not have main report, skipping")
             continue
 
-        df = pandas.read_csv(filepath)
+        filepath_df = pandas.read_csv(filepath)
 
         # check to see if the same has the 'Assembled NTM Results' block in the main report
         if uid in species_table.index:
             if master_table.at[uid, "has_new_block_in_main_report"]:
-            
                 sn = species_table.at[uid, "SPECIES_NAME"]
                 if isinstance(sn, str):
                     if sn.replace(" ", "_") in filepath.stem:
                         species_name = sn
             else:
                 species_name = species_table.at[uid, "SPECIES_NAME"]
-            df.insert(1, "species_name", species_name)
+            filepath_df.insert(1, "species_name", species_name)
         else:
             raise ValueError(f"UID {uid} does not have species name in species table")
         
         species_table.at[uid, "has_" + filename] = True
-        tables.append(df)
+        tables.append(filepath_df)
 
-    df = pandas.concat(tables)
+    tables_df = pandas.concat(tables)
 
     if filename == "effects":
         for col in [
@@ -168,10 +167,10 @@ def build_genetics_table(
             "catalogue_name",
             "prediction_values",
         ]:
-            df[col] = df[col].astype("category")
+            tables_df[col] = tables_df[col].astype("category")
 
-        df = df.rename(columns=str.upper)
-        df.set_index(
+        tables_df = tables_df.rename(columns=str.upper)
+        tables_df.set_index(
             [
                 "UNIQUEID",
                 "SPECIES_NAME",
@@ -193,10 +192,10 @@ def build_genetics_table(
             "catalogue_name",
             "catalogue_values",
         ]:
-            df[col] = df[col].astype("category")
+            tables_df[col] = tables_df[col].astype("category")
 
-        df = df.rename(columns=str.upper)
-        df.set_index(
+        tables_df = tables_df.rename(columns=str.upper)
+        tables_df.set_index(
             [
                 "UNIQUEID",
                 "SPECIES_NAME",
@@ -211,7 +210,7 @@ def build_genetics_table(
     elif filename == "variants":
         tables = []
         counter = 0
-        for df_i in tqdm(numpy.array_split(df, chunks)):
+        for df_i in tqdm(numpy.array_split(tables_df, chunks)):
             df_i[
                 [
                     "run_accession",
@@ -245,7 +244,7 @@ def build_genetics_table(
 
             tables.append(df_i)
             counter += 1
-        df = pandas.concat(tables)
+        tables_df = pandas.concat(tables)
 
         files = glob.glob(str(tables_path) + "/VARIANTS_*.parquet")
         schema = pq.ParquetFile(files[0]).schema_arrow
@@ -257,7 +256,7 @@ def build_genetics_table(
 
     elif filename == "mutations":
         tables = []
-        for df_i in tqdm(numpy.array_split(df, chunks)):
+        for df_i in tqdm(numpy.array_split(tables_df, chunks)):
             df_i[
                 [
                     "run_accession",
@@ -287,11 +286,11 @@ def build_genetics_table(
 
             tables.append(df_i)
 
-        df = pandas.concat(tables)
+        tables_df = pandas.concat(tables)
 
     if filename != "variants":
-        df.to_csv(str(tables_path / filename.upper()) + ".csv", index=True)
-        df.to_parquet(str(tables_path / filename.upper()) + ".parquet")
+        tables_df.to_csv(str(tables_path / filename.upper()) + ".csv", index=True)
+        tables_df.to_parquet(str(tables_path / filename.upper()) + ".parquet")
 
     with pandas.option_context("future.no_silent_downcasting", True):
         species_table = species_table.fillna(
