@@ -172,6 +172,12 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
+# Data Files
+
+VARIANTS_*
+MUTATIONS.csv
+774*.csv
+
 # Exceptions
 
 !test-suite/ntms/walkthrough-tables.ipynb
