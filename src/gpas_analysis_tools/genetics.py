@@ -141,17 +141,20 @@ def build_genetics_table(
         filepath_df = pandas.read_csv(filepath)
 
         # check to see if the same has the 'Assembled NTM Results' block in the main report
-        if uid in species_table.index:
-            if master_table.at[uid, "has_new_block_in_main_report"]:
-                sn = species_table.at[uid, "SPECIES_NAME"]
-                if isinstance(sn, str):
-                    if sn.replace(" ", "_") in filepath.stem:
-                        species_name = sn
-            else:
-                species_name = species_table.at[uid, "SPECIES_NAME"]
-            filepath_df.insert(1, "species_name", species_name)
+        species_name = None
+
+        if master_table.at[uid, "has_new_block_in_main_report"]:
+            sn = species_table.at[uid, "SPECIES_NAME"]
+            if isinstance(sn, str):
+                if sn.replace(" ", "_") in filepath.stem:
+                    species_name = sn
         else:
+            species_name = species_table.at[uid, "SPECIES_NAME"]
+        
+        if species_name is None:
             raise ValueError(f"UID {uid} does not have species name in species table")
+        else:
+            filepath_df.insert(1, "species_name", species_name)
         
         species_table.at[uid, "has_" + filename] = True
         tables.append(filepath_df)
