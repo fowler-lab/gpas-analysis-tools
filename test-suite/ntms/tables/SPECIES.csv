@@ -1,4 +1,4 @@
-RUN_ACCESSION,SPECIES_NAME,SUBSPECIES_NAME,LINEAGE,SUBLINEAGE,N_READS,COVERAGE,DEPTH,has_effects,has_predictions,has_variants,has_mutations
+RUN_ACCESSION,SPECIES_NAME,SUBSPECIES_NAME,LINEAGE,SUBLINEAGE,N_READS,COVERAGE,DEPTH,has_predictions,has_effects,has_mutations,has_variants
 05c9ed42-e452-48d9-bee8-993320c428e8,Mycobacterium avium,Mycobacterium avium subsp. hominissuis,,,876374,93.65,24.4945,False,False,True,True
 77434f41-625f-424a-97c5-8d318ce11410,Mycobacterium intracellulare,Mycobacterium intracellulare subsp. intracellulare,,,1806529,93.0141,45.4026,False,False,True,True
 77434f41-625f-424a-97c5-8d318ce11410,Mycobacterium avium,,,,217986,90.6699,5.93603,False,False,True,True

@@ -1,4 +1,4 @@
-RUN_ACCESSION,batch_name,pipeline_version,remote_sample_name,remote_batch_name,remote_batch_id,has_main_report,status,HUMAN_READS,MYCOBACTERIAL_READS,OTHER_BACTERIAL_READS,UNCLASSIFIED_READS,GPAS_PIPELINE_BUILD,has_new_block_in_main_report,number_of_species
+RUN_ACCESSION,batch_name,pipeline_version,remote_sample_name,remote_batch_name,remote_batch_id,has_main_report,status,HUMAN_READS,MYCOBACTERIAL_READS,OTHER_BACTERIAL_READS,UNCLASSIFIED_READS,GPAS_PIPELINE_BUILD,has_new_block_in_main_report,NUMBER_OF_SPECIES
 SRR6981952,TB test batch,2.4.1,0908e4b9-fa2e-4832-b864-58b6e23b53b6,0f0zao,c5bfc0fe-c5ad-48c2-836e-e430d42cf129,True,complete,,1385434.0,2178.0,302.0,5ae3bc4,False,1.0
 SRR6982035,TB test batch,2.4.1,0f098bfb-f479-4bbe-a5b8-7c607147b475,0f0zao,c5bfc0fe-c5ad-48c2-836e-e430d42cf129,True,cannot assemble,,56182.0,750976.0,1804.0,5ae3bc4,False,1.0
 bd821678-1865-48bc-a836-8d97a7e99b3d,trial4-mycobacterium-abscessus_batch_51,2.4.1,e2375fb6-a3fe-49bc-8b17-6cdb0d8e9ecb,0pqwzx,00e3f459-d6a8-4f6d-a9ba-abd210f6b8d5,True,cannot assemble,,2564882.0,0.0,17466.0,68d0e6f,False,1.0
