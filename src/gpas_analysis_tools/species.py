@@ -128,7 +128,7 @@ def build_species_table(data_path = None,
 
         number_species, has_new_block = get_species_number(data, uid)
         master_table.at[uid, "has_new_block_in_main_report"] = has_new_block
-        master_table.at[uid, "number_of_species"] = number_species
+        master_table.at[uid, "NUMBER_OF_SPECIES"] = number_species
 
 
         for sn in range(number_species):
@@ -189,7 +189,7 @@ def build_species_table(data_path = None,
     with pandas.option_context("future.no_silent_downcasting", True):
         master_table = master_table.fillna(value = {
                 "has_new_block_in_main_report": False,
-                "number_of_species": 0,
+                "NUMBER_OF_SPECIES": 0,
                 "has_main_report": False,
                 }).infer_objects(copy=False)
 

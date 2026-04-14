@@ -59,10 +59,10 @@ Using the same terminal (as you've now got the `gpas` CLI setup), we can downloa
 
 ```
 gpas download --filenames main_report.json --output-dir data/main_report/ --rename TEST_MASTER_TABLE.csv
-gpas download --filenames '*.effects.csv' --output-dir data/effects/ --rename TEST_MASTER_TABLE.csv
-gpas download --filenames '*.predictions.csv' --output-dir data/predictions/ --rename TEST_MASTER_TABLE.csv
-gpas download --filenames '*.mutations.csv' --output-dir data/mutations/ --rename TEST_MASTER_TABLE.csv
-gpas download --filenames "*variants.csv" --output-dir data/variants/ --rename TEST_MASTER_TABLE.csv
+gpas download --filenames '.*effects.csv' --output-dir data/effects/ --rename TEST_MASTER_TABLE.csv
+gpas download --filenames '.*predictions.csv' --output-dir data/predictions/ --rename TEST_MASTER_TABLE.csv
+gpas download --filenames '.*mutations.csv' --output-dir data/mutations/ --rename TEST_MASTER_TABLE.csv
+gpas download --filenames ".*variants.csv" --output-dir data/variants/ --rename TEST_MASTER_TABLE.csv
 ```
 
 Each of these commands will download the specified output files (if created) for each of the samples. One of the TB samples has been purposefully included as it has a `main_report.json` but has insufficient reads to go to mapping so has no subsequent CSV files. Likewise one of the NTM samples is a mixture and so has two mutations and two variants CSV files. Obviously on a very large dataset these download commands would take some time.
@@ -88,18 +88,27 @@ Now we can use `gat` to discover and aggregate the files we've just downloaded. 
 This is a bit hacky but `gpas` expects a column called `sample_name` whilst `gat` expects it to be called `RUN_ACCESSION` so first let's *manually* rename it in `TEST_MASTER_TABLE.csv` and then we can use `gat` to discover the files and build the tables. It is important that you first discover the `main_report.json` files as this creates the `SPECIES` table which we need for tracking in the subsequent steps.
 
 ```
-gat build-tables --lookup-table TEST_MASTER_TABLE_renamed.csv --source-files data/ --chunks 2 --output tables/ --filename species
+gat build-tables --lookup-table TEST_MASTER_TABLE_renamed.csv --source-files data/ --chunks 2 --output tables/ --tablename species
 ```
 
 That has written two tables to `tables/`. One called `SPECIES` and the other is a modified copy of `TEST_MASTER_TABLE_renamed`. Both are written as CSV and Parquet files. Now we can issue
 
 ```
-gat build-tables --lookup-table tables/TEST_MASTER_TABLE_renamed.csv --source-files data/ --chunks 2 --output tables/ --filename predictions
-gat build-tables --lookup-table tables/TEST_MASTER_TABLE_renamed.csv --source-files data/ --chunks 2 --output tables/ --filename effects
+gat build-tables --lookup-table tables/TEST_MASTER_TABLE_renamed.csv --source-files data/ --chunks 2 --output tables/ --tablename predictions
+gat build-tables --lookup-table tables/TEST_MASTER_TABLE_renamed.csv --source-files data/ --chunks 2 --output tables/ --tablename effects
 ```
 
-These are both quick. The next two will take much longer and to speed things up I've used `pandarallel` to parallelise the pandas `apply` function that is taking the time. Also to avoid memory issues the `chunks` argument breaks up the dataframe into that many chunks and processes them sequentially. The two interact so for `pandarallel` to run efficiently you want the smallest number of chunks as the time taken to load everything into memory slows it down, but if the chunks get too large then you get memory issues. The default is 100 but as the example above only has six samples, I've set it to two to speed it up.
+These are both quick. The next two will take much longer using the defaults. To speed things up I've used `pandarallel` to parallelise the pandas `apply` function that is taking the time. Also to avoid memory issues the `chunks` argument breaks up the dataframe into that many chunks and processes them sequentially. The two interact so for `pandarallel` to run efficiently you want the smallest number of chunks as the time taken to load everything into memory slows it down, but if the chunks get too large then you get memory issues. The number of `chunks` defaults to 1 whilst `pandarallel` will grab all the CPU cores it can see. (Aside: I did try making the number of cores an argument but the way `pandarallel` is written makes this difficult -- you can of course change it but you need to modify the `pandarallel.initialize()` call in the code).
 
 ```
-gat build-tables --lookup-table tables/TEST_MASTER_TABLE_renamed.csv --source-files data/ --chunks 2 --output tables/ --filename mutations
+gat build-tables --lookup-table tables/TEST_MASTER_TABLE_renamed.csv --source-files data/ --output tables/ --tablename mutations
+gat build-tables --lookup-table tables/TEST_MASTER_TABLE_renamed.csv --source-files data/ --output tables/ --tablename variants
 ```
+
+The last thing to do is to join `MUTATIONS` and `VARIANTS` so we can populate `COVERAGE` and `FRS`.
+
+```
+gat correct-tables --input-dir tables/ --output-name tables/MUTATIONS-CORRECTED.parquet
+```
+
+Now we have a complete set of tables!
