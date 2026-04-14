@@ -16,7 +16,11 @@ Issues
 2. Why does mykrobe report a lineage but then record zero median depth for some samples?
 3. Why are some samples missing a `main_report`? Example is `site.10.subj.YA00040368.lab.YA00040368.iso.1` / `98bc5c23-d219-43bb-9aab-e8df1c6a0f7e` which I can download via mapping but isn't in the folder, suggesting it failed. Curiously it is the last file in the mapping csv.
 
-## Setting up the GPAS CLI
+## NTMs test-suite
+
+If you want to see how it all works, then start here and follow the instructions below. It will walk you through installing the GPAS client and then this package (which contains an toy dataset of six samples). You will then download the output files from `sp3dev` using the `gpas` CLI before aggregating them using the `gat` command. 
+
+### Setting up the GPAS CLI
 
 The below sets up the GPAS CLI using a branch that contains a fix for downloading files using regexs.
 
@@ -49,11 +53,9 @@ gpas auth
 Now you have a token that is valid for 24 hours and can be used to download files from GPAS. You can check the token is valid by running `gpas auth --check-expiry`.
 
 
-## NTMs test-suite
-
 ### Creating the data tables
 
-First let's setup `gpas-analysis-tools`. Can do this in the same `env` environment as above (i.e. stay in the same terminal!).
+First let's setup `gpas-analysis-tools`. Do this in the same `env` environment as above (i.e. stay in the same terminal!).
 
 ```
 cd ..
@@ -116,6 +118,6 @@ gat correct-tables --input-dir tables/ --output-name tables/MUTATIONS-CORRECTED.
 
 Now we have a complete set of tables!
 
-### Exploring the tables
+### Exploring the tables
 
 There is a short exploration in `walkthrough-tables.ipynb` that talks about a few things. Load that notebook using e.g. VS Code.
