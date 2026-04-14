@@ -62,18 +62,24 @@ def correct_tables(
 
 
 def build_tables(
-    lookup_table: str = None,
+    lookup_table: str | None = None,
     source_files: str = "data/",
-    max_samples: int = None,
-    output: str = None,
-    tablename: str = None,
+    max_samples: int | None = None,
+    output: str | None = None,
+    tablename: str | None = None,
     chunks: int = 1,
 ):
+    if lookup_table is None:
+        print("No lookup table provided, exiting.")
+        return
     master_file = pathlib.Path(lookup_table)
     master_table = pandas.read_csv(master_file)
     master_table.set_index("RUN_ACCESSION", inplace=True)
 
     data_path = pathlib.Path(source_files)
+    if output is None:
+        print("No output path provided, exiting.")
+        return    
     tables_path = pathlib.Path(output)
 
     assert tablename in [
@@ -109,7 +115,7 @@ def main():
     defopt.run(
         [build_tables, correct_tables],
         no_negated_flags=True,
-        strict_kwonly=False,
+        strict_kwonly="False",
         short={},
     )
 

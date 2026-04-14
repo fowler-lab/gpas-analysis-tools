@@ -1,5 +1,7 @@
-import pandas
 import json
+import pandas
+
+from pathlib import Path
 
 from tqdm import tqdm
 
@@ -80,10 +82,10 @@ def parse_lineage(lineage_results):
 
 
 def build_species_table(
-    data_path=None,
-    tables_path=None,
-    master_table=None,
-    max_samples=None,
+    data_path,
+    tables_path,
+    master_table,
+    max_samples,
 ):
     successful_genome = 0
     too_few_reads_genome = 0
