@@ -152,11 +152,11 @@ def build_genetics_table(filename, data_path, tables_path, master_table, max_sam
             "prediction_values",
         ]:
             df[col] = df[col].astype("category")
-
+        df = df.rename(columns={'uniqueid': 'run_accession'})
         df = df.rename(columns=str.upper)
         df.set_index(
             [
-                "UNIQUEID",
+                "RUN_ACCESSION",
                 "SPECIES_NAME",
                 "CATALOGUE_NAME",
                 "CATALOGUE_VERSION",
@@ -177,11 +177,12 @@ def build_genetics_table(filename, data_path, tables_path, master_table, max_sam
             "catalogue_values",
         ]:
             df[col] = df[col].astype("category")
-
+    
+        df = df.rename(columns={'uniqueid': 'run_accession'})
         df = df.rename(columns=str.upper)
         df.set_index(
             [
-                "UNIQUEID",
+                "RUN_ACCESSION",
                 "SPECIES_NAME",
                 "CATALOGUE_NAME",
                 "CATALOGUE_VERSION",
