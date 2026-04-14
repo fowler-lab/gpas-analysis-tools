@@ -120,12 +120,12 @@ def build_genetics_table(
 
     n_files = sum(1 for i in (data_path).rglob("*" + filename + "*.csv"))
 
-    for i in tqdm((data_path).rglob("*" + filename + "*.csv"), total=n_files):
+    for filepath in tqdm((data_path).rglob("*" + filename + "*.csv"), total=n_files):
         n_samples += 1
         if max_samples is not None and n_samples > max_samples:
             break
 
-        uid = i.stem.split("_")[0]
+        uid = filepath.stem.split("_")[0]
         if filename in uid:
             uid = uid.split("." + filename)[0]
         if "." in uid:
@@ -138,17 +138,22 @@ def build_genetics_table(
             print(f"UID {uid} does not have main report, skipping")
             continue
 
-        df = pandas.read_csv(i)
+        df = pandas.read_csv(filepath)
 
         # check to see if the same has the 'Assembled NTM Results' block in the main report
-        if master_table.at[uid, "has_new_block_in_main_report"]:
-            for sn in list(species_table.at[uid, "SPECIES_NAME"]):
-                if sn.replace(" ", "_") in i.stem:
-                    species_name = sn
+        if uid in species_table.index:
+            if master_table.at[uid, "has_new_block_in_main_report"]:
+            
+                sn = species_table.at[uid, "SPECIES_NAME"]
+                if isinstance(sn, str):
+                    if sn.replace(" ", "_") in filepath.stem:
+                        species_name = sn
+            else:
+                species_name = species_table.at[uid, "SPECIES_NAME"]
+            df.insert(1, "species_name", species_name)
         else:
-            species_name = species_table.at[uid, "SPECIES_NAME"]
-        df.insert(1, "species_name", species_name)
-
+            raise ValueError(f"UID {uid} does not have species name in species table")
+        
         species_table.at[uid, "has_" + filename] = True
         tables.append(df)
 
