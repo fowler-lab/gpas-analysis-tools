@@ -1,17 +1,21 @@
-import pandas, numpy, glob, json
+import glob
+import json
 
+import numpy
+import pandas
+
+from pandarallel import pandarallel
 import pyarrow.parquet as pq
-
 from tqdm import tqdm
 
 tqdm.pandas()
 
-from pandarallel import pandarallel
+pandarallel.initialize(
+    progress_bar=False, verbose=1
+)  # nb_workers not set so defaults to all cores available
 
-pandarallel.initialize(progress_bar=False, verbose=1) #nb_workers not set so defaults to all cores available
 
 def parse_variants(row):
-
     variant = row.variant
     is_null = False
     is_minor = False
@@ -57,8 +61,8 @@ def parse_variants(row):
         else:
             variant = minor_variant[:-1] + "z"
 
-    if '.' in row.uniqueid:
-        uid = row.uniqueid.split('.')[0]
+    if "." in row.uniqueid:
+        uid = row.uniqueid.split(".")[0]
     else:
         uid = row.uniqueid
 
@@ -68,7 +72,6 @@ def parse_variants(row):
 
 
 def parse_mutations(row):
-
     mutation = row.mutation
     is_null = False
     is_minor = False
@@ -90,16 +93,26 @@ def parse_mutations(row):
     elif mutation[-1] in ["X", "x"]:
         is_null = True
 
-    if '.' in row.uniqueid:
-        uid = row.uniqueid.split('.')[0]
+    if "." in row.uniqueid:
+        uid = row.uniqueid.split(".")[0]
     else:
         uid = row.uniqueid
 
-    return pandas.Series([uid, mutation, is_null, is_minor, minor_mutation, minor_reads])
+    return pandas.Series(
+        [uid, mutation, is_null, is_minor, minor_mutation, minor_reads]
+    )
 
 
-def build_genetics_table(filename, data_path, tables_path, master_table, max_samples, chunks, nprocs, uppercase = True):
-
+def build_genetics_table(
+    filename,
+    data_path,
+    tables_path,
+    master_table,
+    max_samples,
+    chunks,
+    nprocs,
+    uppercase=True,
+):
     tables = []
     n_samples = 0
 
@@ -108,34 +121,33 @@ def build_genetics_table(filename, data_path, tables_path, master_table, max_sam
     n_files = sum(1 for i in (data_path).rglob("*" + filename + "*.csv"))
 
     for i in tqdm((data_path).rglob("*" + filename + "*.csv"), total=n_files):
-
         n_samples += 1
         if max_samples is not None and n_samples > max_samples:
             break
 
         uid = i.stem.split("_")[0]
         if filename in uid:
-            uid = uid.split('.'+filename)[0]
-        if '.' in uid:
-            uid = uid.split('.')[0]
+            uid = uid.split("." + filename)[0]
+        if "." in uid:
+            uid = uid.split(".")[0]
 
         # let's check the uid is at least in the master_table!
         assert uid in master_table.index, f"UID {uid} not found in master table"
-        
+
         if not master_table.at[uid, "has_main_report"]:
             print(f"UID {uid} does not have main report, skipping")
             continue
 
         df = pandas.read_csv(i)
-        
+
         # check to see if the same has the 'Assembled NTM Results' block in the main report
-        if master_table.at[uid, 'has_new_block_in_main_report']:
-            for sn in list(species_table.at[uid, 'SPECIES_NAME']):
-                if sn.replace(' ','_') in i.stem:
+        if master_table.at[uid, "has_new_block_in_main_report"]:
+            for sn in list(species_table.at[uid, "SPECIES_NAME"]):
+                if sn.replace(" ", "_") in i.stem:
                     species_name = sn
         else:
-            species_name = species_table.at[uid, 'SPECIES_NAME']
-        df.insert(1, 'species_name', species_name)
+            species_name = species_table.at[uid, "SPECIES_NAME"]
+        df.insert(1, "species_name", species_name)
 
         species_table.at[uid, "has_" + filename] = True
         tables.append(df)
@@ -206,7 +218,7 @@ def build_genetics_table(filename, data_path, tables_path, master_table, max_sam
                     "coverage",
                 ]
             ] = df_i.parallel_apply(parse_variants, axis=1)
-            df_i.drop(columns=["variant","uniqueid"], inplace=True)
+            df_i.drop(columns=["variant", "uniqueid"], inplace=True)
             df_i.rename(columns={"var": "variant"}, inplace=True)
             for col in [
                 "gene",
@@ -215,15 +227,15 @@ def build_genetics_table(filename, data_path, tables_path, master_table, max_sam
                 df_i[col] = df_i[col].astype("category")
 
             df_i = df_i.rename(columns=str.upper)
-            df_i.set_index(["RUN_ACCESSION", "SPECIES_NAME", "GENE", "VARIANT"], inplace=True)
+            df_i.set_index(
+                ["RUN_ACCESSION", "SPECIES_NAME", "GENE", "VARIANT"], inplace=True
+            )
             df_i.to_csv(
-                str(tables_path / (filename.upper() + "_" + str(counter)))
-                + ".csv"
+                str(tables_path / (filename.upper() + "_" + str(counter))) + ".csv"
             )
             df_i.drop(columns=["VCF_EVIDENCE"], inplace=True)
             df_i.to_parquet(
-                str(tables_path / (filename.upper() + "_" + str(counter)))
-                + ".parquet"
+                str(tables_path / (filename.upper() + "_" + str(counter))) + ".parquet"
             )
 
             tables.append(df_i)
@@ -239,11 +251,17 @@ def build_genetics_table(filename, data_path, tables_path, master_table, max_sam
                 writer.write_table(pq.read_table(file, schema=schema))
 
     elif filename == "mutations":
-
         tables = []
         for df_i in tqdm(numpy.array_split(df, chunks)):
             df_i[
-                ["run_accession", "mut", "is_null", "is_minor", "minor_mutation", "minor_reads"]
+                [
+                    "run_accession",
+                    "mut",
+                    "is_null",
+                    "is_minor",
+                    "minor_mutation",
+                    "minor_reads",
+                ]
             ] = df_i.parallel_apply(parse_mutations, axis=1)
             df_i.drop(columns=["mutation", "uniqueid"], inplace=True)
             df_i.rename(columns={"mut": "mutation"}, inplace=True)
@@ -258,7 +276,9 @@ def build_genetics_table(filename, data_path, tables_path, master_table, max_sam
                 df_i[col] = df_i[col].astype("category")
 
             df_i = df_i.rename(columns=str.upper)
-            df_i.set_index(["RUN_ACCESSION", "SPECIES_NAME", "GENE", "MUTATION"], inplace=True)
+            df_i.set_index(
+                ["RUN_ACCESSION", "SPECIES_NAME", "GENE", "MUTATION"], inplace=True
+            )
 
             tables.append(df_i)
 
@@ -269,8 +289,8 @@ def build_genetics_table(filename, data_path, tables_path, master_table, max_sam
         df.to_parquet(str(tables_path / filename.upper()) + ".parquet")
 
     with pandas.option_context("future.no_silent_downcasting", True):
-        species_table = species_table.fillna(value = {
-                "has_" + filename: False
-                }).infer_objects(copy=False)
+        species_table = species_table.fillna(
+            value={"has_" + filename: False}
+        ).infer_objects(copy=False)
 
     return species_table

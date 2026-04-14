@@ -1,8 +1,7 @@
-import pandas, pathlib, json, numpy, glob
-
+import numpy
+import pandas
+import pathlib
 from tqdm import tqdm
-
-from collections import defaultdict
 
 from .species import build_species_table
 from .genetics import build_genetics_table
@@ -16,10 +15,9 @@ def split_species(row):
     return species
 
 
-
-
-def correct_tables(input_dir: str = ".", output_name: str = "MUTATIONS_CORRECTED.parquet"):
-
+def correct_tables(
+    input_dir: str = ".", output_name: str = "MUTATIONS_CORRECTED.parquet"
+):
     input = pathlib.Path(input_dir)
 
     print("reading the VARIANTS dataframe")
@@ -57,11 +55,11 @@ def correct_tables(input_dir: str = ".", output_name: str = "MUTATIONS_CORRECTED
 
     print("writing the new MUTATIONS dataframe to disc")
     mutations.reset_index(inplace=True)
-    mutations.set_index(["RUN_ACCESSION", "SPECIES_NAME", "GENE", "MUTATION"], inplace=True)
+    mutations.set_index(
+        ["RUN_ACCESSION", "SPECIES_NAME", "GENE", "MUTATION"], inplace=True
+    )
     mutations.to_parquet(output_name)
 
-
- 
 
 def build_tables(
     lookup_table: str = None,
@@ -87,15 +85,19 @@ def build_tables(
     ], "can only specify one from this list"
 
     if tablename == "species":
-        
-        master_table = build_species_table(data_path, tables_path, master_table, max_samples)
-      
+        master_table = build_species_table(
+            data_path, tables_path, master_table, max_samples
+        )
+
         master_table.to_csv(tables_path / (master_file.stem + ".csv"), index=True)
-        master_table.to_parquet(tables_path / (master_file.stem + ".parquet"), index=True)
+        master_table.to_parquet(
+            tables_path / (master_file.stem + ".parquet"), index=True
+        )
 
     if tablename in ["effects", "mutations", "predictions", "variants"]:
-
-        species_table = build_genetics_table(tablename, data_path, tables_path, master_table, max_samples, chunks, False)
+        species_table = build_genetics_table(
+            tablename, data_path, tables_path, master_table, max_samples, chunks, False
+        )
 
         species_table.to_csv(tables_path / "SPECIES.csv", index=True)
         species_table.to_parquet(tables_path / "SPECIES.parquet")
