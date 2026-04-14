@@ -1,0 +1,192 @@
+{
+    "Pipeline Outcome": "Sufficient reads mapped to M. tuberculosis (H37Rv v3) for genome assembly, resistance prediction and relatedness assessment.",
+    "Organism Identification": {
+        "Human Reads": null,
+        "Unclassified Reads": 192,
+        "Non-Mycobacterium Bacteria Reads": 5660,
+        "Mycobacterium Reads": 3667176
+    },
+    "Mycobacterium Results": {
+        "Summary": [
+            {
+                "Name": "M. tuberculosis (lineage 1.2.1)",
+                "Num Reads": 3585232,
+                "Coverage": 99.7362,
+                "Depth": 99.2324
+            }
+        ],
+        "Species": [
+            {
+                "Name": "M.tuberculosis",
+                "Num Reads": 3585232,
+                "Coverage": 99.7362,
+                "Mean Depth": 99.2324,
+                "Length": 4411532.0
+            }
+        ],
+        "Phylogenic Group": [
+            {
+                "Name": "Mycobacterium_tuberculosis_complex",
+                "Coverage": 98.816,
+                "Median Depth": 83
+            }
+        ],
+        "Subspecies": [
+            {
+                "Name": "Mycobacterium_tuberculosis",
+                "Coverage": 31.279,
+                "Median Depth": 79
+            }
+        ],
+        "Lineage": [
+            {
+                "Name": "lineage1.2.1",
+                "Coverage": 0,
+                "Median Depth": 0
+            }
+        ]
+    },
+    "Genomes": [
+        {
+            "Name": "M. tuberculosis",
+            "Sequencing Quality": {
+                "Mapped To": "M. tuberculosis (H37Rv v3) NC_000962.3",
+                "Num Reads": 3585232,
+                "Coverage": 99.5129,
+                "Mean Depth": 99.2324,
+                "Mixed calls": 294,
+                "Null calls": 21489,
+                "Reference genome length": 4411532
+            },
+            "Resistance Prediction": {
+                "Resistance Prediction Summary": {
+                    "First-line treatment": {
+                        "Isoniazid (INH)": "S",
+                        "Rifampicin (RIF)": "S",
+                        "Pyrazinamide (PZA)": "S",
+                        "Ethambutol (EMB)": "S"
+                    },
+                    "Second-line treatment": {
+                        "Moxifloxacin (MXF)": "S",
+                        "Levofloxacin (LEV)": "S",
+                        "Linezolid (LZD)": "U",
+                        "Bedaquiline (BDQ)": "S"
+                    },
+                    "Reserve treatment": {
+                        "Amikacin (AMI)": "S",
+                        "Kanamycin (KAN)": "S",
+                        "Streptomycin (STM)": "R",
+                        "Capreomycin (CAP)": "S",
+                        "Ethionamide (ETH)": "U",
+                        "Delamanid (DLM)": "S"
+                    }
+                },
+                "Resistance Prediction Detail": [
+                    {
+                        "Drug Name": "ETH",
+                        "Mutations": [
+                            {
+                                "Gene": null,
+                                "Mutation": "fabG1@G241G&fabG1@c723t",
+                                "Position": null,
+                                "Ref": "",
+                                "Alt": "",
+                                "Coverage": [
+                                    null,
+                                    null
+                                ],
+                                "Prediction": "U",
+                                "Evidence": {
+                                    "Observed_samples": {
+                                        "Present_SOLO_SR": 60,
+                                        "Present_SOLO_R": 2,
+                                        "Present_SOLO_S": 58
+                                    },
+                                    "Additional grading criteria applied": null,
+                                    "FINAL CONFIDENCE GRADING": "3) Uncertain significance",
+                                    "INITIAL CONFIDENCE GRADING": "3) Uncertain significance",
+                                    "WHO HGVS": "inhA_c.-40C>T"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "Drug Name": "LZD",
+                        "Mutations": [
+                            {
+                                "Gene": "rrl",
+                                "Mutation": "g982a",
+                                "Position": 982,
+                                "Ref": "g",
+                                "Alt": "a",
+                                "Coverage": [
+                                    0,
+                                    44
+                                ],
+                                "Prediction": "U",
+                                "Evidence": {
+                                    "reporting_rule": "True"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "Drug Name": "STM",
+                        "Mutations": [
+                            {
+                                "Gene": "gid",
+                                "Mutation": "W148C",
+                                "Position": 148,
+                                "Ref": "tgg",
+                                "Alt": "tgc",
+                                "Coverage": [
+                                    0,
+                                    135
+                                ],
+                                "Prediction": "U",
+                                "Evidence": {
+                                    "reporting_rule": "True"
+                                }
+                            },
+                            {
+                                "Gene": "rrs",
+                                "Mutation": "a514c",
+                                "Position": 514,
+                                "Ref": "a",
+                                "Alt": "c",
+                                "Coverage": [
+                                    0,
+                                    23
+                                ],
+                                "Prediction": "R",
+                                "Evidence": {
+                                    "Observed_samples": {
+                                        "Present_SOLO_SR": 316,
+                                        "Present_SOLO_R": 305,
+                                        "Present_SOLO_S": 11
+                                    },
+                                    "Additional grading criteria applied": null,
+                                    "FINAL CONFIDENCE GRADING": "1) Assoc w R",
+                                    "INITIAL CONFIDENCE GRADING": "1) Assoc w R",
+                                    "WHO HGVS": "rrs_n.514A>C"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ],
+    "Metadata": {
+        "Pipeline build": "149a518",
+        "Reference Data Files": {
+            "manifest": "manifest_20231001",
+            "species_list": "species_list_manifest_20240710.csv",
+            "name_mapping": "competitive_mapping_mykrobe_names_20241105.csv",
+            "ref_files": "Ref_prepare",
+            "tb_ref_genome": "NC_000962.3.gbk",
+            "tb_amr_cat": "NC_000962.3_WHO-UCN-TB-2023.5_v2.0_GARC1_RFUS.csv",
+            "sundial_ref": "h37rv_20231215.fa.gz"
+        }
+    }
+}

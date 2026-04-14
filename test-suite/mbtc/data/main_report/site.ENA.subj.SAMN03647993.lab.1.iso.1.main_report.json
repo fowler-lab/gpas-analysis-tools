@@ -1,0 +1,217 @@
+{
+    "Pipeline Outcome": "Sufficient reads mapped to M. tuberculosis (H37Rv v3) for genome assembly, resistance prediction and relatedness assessment.",
+    "Organism Identification": {
+        "Human Reads": null,
+        "Unclassified Reads": 340,
+        "Non-Mycobacterium Bacteria Reads": 3072,
+        "Mycobacterium Reads": 1872950
+    },
+    "Mycobacterium Results": {
+        "Summary": [
+            {
+                "Name": "M. tuberculosis (lineage 1.2.2)",
+                "Num Reads": 1814920,
+                "Coverage": 99.5889,
+                "Depth": 40.3505
+            }
+        ],
+        "Species": [
+            {
+                "Name": "M.tuberculosis",
+                "Num Reads": 1814920,
+                "Coverage": 99.5889,
+                "Mean Depth": 40.3505,
+                "Length": 4411532.0
+            }
+        ],
+        "Phylogenic Group": [
+            {
+                "Name": "Mycobacterium_tuberculosis_complex",
+                "Coverage": 98.328,
+                "Median Depth": 30
+            }
+        ],
+        "Subspecies": [
+            {
+                "Name": "Mycobacterium_tuberculosis",
+                "Coverage": 31.571,
+                "Median Depth": 25
+            }
+        ],
+        "Lineage": [
+            {
+                "Name": "lineage1.2.2",
+                "Coverage": 0,
+                "Median Depth": 0
+            }
+        ]
+    },
+    "Genomes": [
+        {
+            "Name": "M. tuberculosis",
+            "Sequencing Quality": {
+                "Mapped To": "M. tuberculosis (H37Rv v3) NC_000962.3",
+                "Num Reads": 1814920,
+                "Coverage": 98.6701,
+                "Mean Depth": 40.3505,
+                "Mixed calls": 340,
+                "Null calls": 58668,
+                "Reference genome length": 4411532
+            },
+            "Resistance Prediction": {
+                "Resistance Prediction Summary": {
+                    "First-line treatment": {
+                        "Isoniazid (INH)": "S",
+                        "Rifampicin (RIF)": "S",
+                        "Pyrazinamide (PZA)": "R",
+                        "Ethambutol (EMB)": "S"
+                    },
+                    "Second-line treatment": {
+                        "Moxifloxacin (MXF)": "U",
+                        "Levofloxacin (LEV)": "U",
+                        "Linezolid (LZD)": "S",
+                        "Bedaquiline (BDQ)": "S"
+                    },
+                    "Reserve treatment": {
+                        "Amikacin (AMI)": "S",
+                        "Kanamycin (KAN)": "S",
+                        "Streptomycin (STM)": "S",
+                        "Capreomycin (CAP)": "S",
+                        "Ethionamide (ETH)": "U",
+                        "Delamanid (DLM)": "U"
+                    }
+                },
+                "Resistance Prediction Detail": [
+                    {
+                        "Drug Name": "DLM",
+                        "Mutations": [
+                            {
+                                "Gene": "ddn",
+                                "Mutation": "A111T",
+                                "Position": 111,
+                                "Ref": "gcg",
+                                "Alt": "acg",
+                                "Coverage": [
+                                    0,
+                                    39
+                                ],
+                                "Prediction": "U",
+                                "Evidence": {
+                                    "reporting_rule": "True"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "Drug Name": "ETH",
+                        "Mutations": [
+                            {
+                                "Gene": "ethA",
+                                "Mutation": "N345K",
+                                "Position": 345,
+                                "Ref": "aac",
+                                "Alt": "aaa",
+                                "Coverage": [
+                                    0,
+                                    73
+                                ],
+                                "Prediction": "U",
+                                "Evidence": {
+                                    "Observed_samples": {
+                                        "Present_SOLO_SR": 236,
+                                        "Present_SOLO_R": 28,
+                                        "Present_SOLO_S": 208
+                                    },
+                                    "Additional grading criteria applied": null,
+                                    "FINAL CONFIDENCE GRADING": "3) Uncertain significance",
+                                    "INITIAL CONFIDENCE GRADING": "3) Uncertain significance",
+                                    "WHO HGVS": "ethA_p.Asn345Lys"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "Drug Name": "LEV",
+                        "Mutations": [
+                            {
+                                "Gene": "gyrA",
+                                "Mutation": "K636N",
+                                "Position": 636,
+                                "Ref": "aag",
+                                "Alt": "aac",
+                                "Coverage": [
+                                    0,
+                                    41
+                                ],
+                                "Prediction": "U",
+                                "Evidence": {
+                                    "reporting_rule": "True"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "Drug Name": "MXF",
+                        "Mutations": [
+                            {
+                                "Gene": "gyrA",
+                                "Mutation": "K636N",
+                                "Position": 636,
+                                "Ref": "aag",
+                                "Alt": "aac",
+                                "Coverage": [
+                                    0,
+                                    41
+                                ],
+                                "Prediction": "U",
+                                "Evidence": {
+                                    "reporting_rule": "True"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "Drug Name": "PZA",
+                        "Mutations": [
+                            {
+                                "Gene": "pncA",
+                                "Mutation": "G132D",
+                                "Position": 132,
+                                "Ref": "ggt",
+                                "Alt": "gat",
+                                "Coverage": [
+                                    0,
+                                    37
+                                ],
+                                "Prediction": "R",
+                                "Evidence": {
+                                    "Observed_samples": {
+                                        "Present_SOLO_SR": 2,
+                                        "Present_SOLO_R": 2,
+                                        "Present_SOLO_S": 0
+                                    },
+                                    "Additional grading criteria applied": null,
+                                    "FINAL CONFIDENCE GRADING": "2) Assoc w R - Interim",
+                                    "INITIAL CONFIDENCE GRADING": "2) Assoc w R - Interim",
+                                    "WHO HGVS": "pncA_p.Gly132Asp"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ],
+    "Metadata": {
+        "Pipeline build": "149a518",
+        "Reference Data Files": {
+            "manifest": "manifest_20231001",
+            "species_list": "species_list_manifest_20240710.csv",
+            "name_mapping": "competitive_mapping_mykrobe_names_20241105.csv",
+            "ref_files": "Ref_prepare",
+            "tb_ref_genome": "NC_000962.3.gbk",
+            "tb_amr_cat": "NC_000962.3_WHO-UCN-TB-2023.5_v2.0_GARC1_RFUS.csv",
+            "sundial_ref": "h37rv_20231215.fa.gz"
+        }
+    }
+}

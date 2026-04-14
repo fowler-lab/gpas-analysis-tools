@@ -1,0 +1,141 @@
+{
+    "Pipeline Outcome": "Sufficient reads mapped to M. tuberculosis (H37Rv v3) for genome assembly, resistance prediction and relatedness assessment.",
+    "Organism Identification": {
+        "Human Reads": null,
+        "Unclassified Reads": 760,
+        "Non-Mycobacterium Bacteria Reads": 4794,
+        "Mycobacterium Reads": 4584288
+    },
+    "Mycobacterium Results": {
+        "Summary": [
+            {
+                "Name": "M. tuberculosis (lineage 4.4.1.2)",
+                "Num Reads": 4511295,
+                "Coverage": 99.2821,
+                "Depth": 125.689
+            }
+        ],
+        "Species": [
+            {
+                "Name": "M.tuberculosis",
+                "Num Reads": 4511295,
+                "Coverage": 99.2821,
+                "Mean Depth": 125.689,
+                "Length": 4411532.0
+            }
+        ],
+        "Phylogenic Group": [
+            {
+                "Name": "Mycobacterium_tuberculosis_complex",
+                "Coverage": 99.735,
+                "Median Depth": 106
+            }
+        ],
+        "Subspecies": [
+            {
+                "Name": "Mycobacterium_tuberculosis",
+                "Coverage": 98.611,
+                "Median Depth": 106
+            }
+        ],
+        "Lineage": [
+            {
+                "Name": "lineage4.4.1.2",
+                "Coverage": 100,
+                "Median Depth": 98
+            }
+        ]
+    },
+    "Genomes": [
+        {
+            "Name": "M. tuberculosis",
+            "Sequencing Quality": {
+                "Mapped To": "M. tuberculosis (H37Rv v3) NC_000962.3",
+                "Num Reads": 4511295,
+                "Coverage": 99.0923,
+                "Mean Depth": 125.689,
+                "Mixed calls": 128,
+                "Null calls": 40043,
+                "Reference genome length": 4411532
+            },
+            "Resistance Prediction": {
+                "Resistance Prediction Summary": {
+                    "First-line treatment": {
+                        "Isoniazid (INH)": "S",
+                        "Rifampicin (RIF)": "S",
+                        "Pyrazinamide (PZA)": "S",
+                        "Ethambutol (EMB)": "S"
+                    },
+                    "Second-line treatment": {
+                        "Moxifloxacin (MXF)": "S",
+                        "Levofloxacin (LEV)": "S",
+                        "Linezolid (LZD)": "S",
+                        "Bedaquiline (BDQ)": "U"
+                    },
+                    "Reserve treatment": {
+                        "Amikacin (AMI)": "S",
+                        "Kanamycin (KAN)": "S",
+                        "Streptomycin (STM)": "S",
+                        "Capreomycin (CAP)": "S",
+                        "Ethionamide (ETH)": "S",
+                        "Delamanid (DLM)": "S"
+                    }
+                },
+                "Resistance Prediction Detail": [
+                    {
+                        "Drug Name": "BDQ",
+                        "Mutations": [
+                            {
+                                "Gene": "pepQ",
+                                "Mutation": "P69L",
+                                "Position": 69,
+                                "Ref": "ccc",
+                                "Alt": "ctc",
+                                "Coverage": [
+                                    0,
+                                    158
+                                ],
+                                "Prediction": "U",
+                                "Evidence": {
+                                    "reporting_rule": "True"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "Drug Name": "CFZ",
+                        "Mutations": [
+                            {
+                                "Gene": "pepQ",
+                                "Mutation": "P69L",
+                                "Position": 69,
+                                "Ref": "ccc",
+                                "Alt": "ctc",
+                                "Coverage": [
+                                    0,
+                                    158
+                                ],
+                                "Prediction": "U",
+                                "Evidence": {
+                                    "reporting_rule": "True"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ],
+    "Metadata": {
+        "Pipeline build": "149a518",
+        "Reference Data Files": {
+            "manifest": "manifest_20231001",
+            "species_list": "species_list_manifest_20240710.csv",
+            "name_mapping": "competitive_mapping_mykrobe_names_20241105.csv",
+            "ref_files": "Ref_prepare",
+            "tb_ref_genome": "NC_000962.3.gbk",
+            "tb_amr_cat": "NC_000962.3_WHO-UCN-TB-2023.5_v2.0_GARC1_RFUS.csv",
+            "sundial_ref": "h37rv_20231215.fa.gz"
+        }
+    }
+}

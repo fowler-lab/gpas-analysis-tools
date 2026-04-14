@@ -1,0 +1,62 @@
+{
+    "Pipeline Outcome": "Mycobacterial species identified. Reads mapped to M. tuberculosis (H37Rv v3) too low to proceed to M. tuberculosis complex genome assembly.",
+    "Organism Identification": {
+        "Human Reads": null,
+        "Unclassified Reads": 1804,
+        "Non-Mycobacterium Bacteria Reads": 750976,
+        "Mycobacterium Reads": 56182
+    },
+    "Mycobacterium Results": {
+        "Summary": [
+            {
+                "Name": "M. tuberculosis (lineage 4.3.2.1)",
+                "Num Reads": 55033,
+                "Coverage": 78.0879,
+                "Depth": 2.07745
+            }
+        ],
+        "Species": [
+            {
+                "Name": "M.tuberculosis",
+                "Num Reads": 55033,
+                "Coverage": 78.0879,
+                "Mean Depth": 2.07745,
+                "Length": 4411532.0
+            }
+        ],
+        "Phylogenic Group": [
+            {
+                "Name": "Mycobacterium_tuberculosis_complex",
+                "Coverage": 68.029,
+                "Median Depth": 2
+            }
+        ],
+        "Subspecies": [
+            {
+                "Name": "Mycobacterium_tuberculosis",
+                "Coverage": 67.484,
+                "Median Depth": 2
+            }
+        ],
+        "Lineage": [
+            {
+                "Name": "lineage4.3.2.1",
+                "Coverage": 100,
+                "Median Depth": 3
+            }
+        ]
+    },
+    "Genomes": null,
+    "Metadata": {
+        "Pipeline build": "5ae3bc4",
+        "Reference Data Files": {
+            "manifest": "manifest_20231001",
+            "species_list": "species_list_manifest_20240710.csv",
+            "name_mapping": "competitive_mapping_mykrobe_names_20241105.csv",
+            "ref_files": "Ref_prepare",
+            "tb_ref_genome": "NC_000962.3.gbk",
+            "tb_amr_cat": "NC_000962.3_WHO-UCN-TB-2023.5_v2.0_GARC1_RFUS.csv",
+            "sundial_ref": "h37rv_20231215.fa.gz"
+        }
+    }
+}

@@ -1,0 +1,117 @@
+{
+    "Pipeline Outcome": "Sufficient reads mapped to 2 species for genome assembly and resistance prediction.",
+    "Organism Identification": {
+        "Human Reads": null,
+        "Unclassified Reads": 51662,
+        "Non-Mycobacterium Bacteria Reads": 0,
+        "Mycobacterium Reads": 2399958
+    },
+    "Mycobacterium Results": {
+        "Summary": [
+            {
+                "Name": "Mycobacterium intracellulare",
+                "Num Reads": 1806529,
+                "Coverage": 93.0141,
+                "Depth": 45.4026
+            }
+        ],
+        "Species": [
+            {
+                "Name": "Mycobacterium intracellulare",
+                "Num Reads": 1806529,
+                "Coverage": 93.0141,
+                "Mean Depth": 45.4026,
+                "Length": 5402402
+            }
+        ],
+        "Phylogenic Group": [
+            {
+                "Name": "Non_tuberculosis_mycobacterium_complex",
+                "Coverage": 90.572,
+                "Median Depth": 43
+            }
+        ],
+        "Subspecies": [
+            {
+                "Name": "Mycobacterium_intracellulare",
+                "Coverage": 90.572,
+                "Median Depth": 43
+            }
+        ],
+        "Lineage": [
+            {
+                "Name": "Mycobacterium_intracellulare_subsp._intracellulare",
+                "Coverage": 83.518,
+                "Median Depth": 42
+            }
+        ]
+    },
+    "Assembled NTM Results": {
+        "Assembled Species": [
+            "Mycobacterium_avium",
+            "Mycobacterium_intracellulare"
+        ],
+        "Summary": [
+            {
+                "Name": "Mycobacterium intracellulare",
+                "Num Reads": 1806529,
+                "Coverage": 93.0141,
+                "Depth": 45.4026
+            },
+            {
+                "Name": "Mycobacterium avium",
+                "Num Reads": 217986,
+                "Coverage": 90.6699,
+                "Depth": 5.93603
+            }
+        ],
+        "Species": [
+            {
+                "Name": "Mycobacterium intracellulare",
+                "Num Reads": 1806529,
+                "Coverage": 93.0141,
+                "Mean Depth": 45.4026,
+                "Length": 5402402
+            },
+            {
+                "Name": "Mycobacterium avium",
+                "Num Reads": 217986,
+                "Coverage": 90.6699,
+                "Mean Depth": 5.93603,
+                "Length": 4956929
+            }
+        ],
+        "Phylogenic Group": [
+            {
+                "Name": "Non_tuberculosis_mycobacterium_complex",
+                "Coverage": 90.572,
+                "Median Depth": 43
+            }
+        ],
+        "Subspecies": [
+            {
+                "Name": "Mycobacterium_intracellulare",
+                "Coverage": 90.572,
+                "Median Depth": 43
+            }
+        ],
+        "Lineage": [
+            {
+                "Name": "Mycobacterium_intracellulare_subsp._intracellulare",
+                "Coverage": 83.518,
+                "Median Depth": 42
+            }
+        ]
+    },
+    "Genomes": null,
+    "Metadata": {
+        "Pipeline build": "fa04ac9",
+        "Reference Data Files": {
+            "manifest": "manifest_20251022.fasta.gz",
+            "species_list": "contigs_20251121.csv",
+            "name_mapping": "competitive_mapping_mykrobe_names_20241105.csv",
+            "tb_amr_cat": "NC_000962.3_WHO-UCN-TB-2023.5_v2.1_GARC1_RFUS.csv",
+            "rundial_ref": "h37rv_20231215.fa.gz"
+        }
+    }
+}

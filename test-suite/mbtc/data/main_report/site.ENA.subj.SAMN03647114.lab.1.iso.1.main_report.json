@@ -1,0 +1,209 @@
+{
+    "Pipeline Outcome": "Sufficient reads mapped to M. tuberculosis (H37Rv v3) for genome assembly, resistance prediction and relatedness assessment.",
+    "Organism Identification": {
+        "Human Reads": null,
+        "Unclassified Reads": 50,
+        "Non-Mycobacterium Bacteria Reads": 1798,
+        "Mycobacterium Reads": 2610546
+    },
+    "Mycobacterium Results": {
+        "Summary": [
+            {
+                "Name": "M. tuberculosis (lineage 4.10)",
+                "Num Reads": 2564607,
+                "Coverage": 99.4651,
+                "Depth": 83.162
+            }
+        ],
+        "Species": [
+            {
+                "Name": "M.tuberculosis",
+                "Num Reads": 2564607,
+                "Coverage": 99.4651,
+                "Mean Depth": 83.162,
+                "Length": 4411532.0
+            }
+        ],
+        "Phylogenic Group": [
+            {
+                "Name": "Mycobacterium_tuberculosis_complex",
+                "Coverage": 99.91,
+                "Median Depth": 70
+            }
+        ],
+        "Subspecies": [
+            {
+                "Name": "Mycobacterium_tuberculosis",
+                "Coverage": 99.241,
+                "Median Depth": 70
+            }
+        ],
+        "Lineage": [
+            {
+                "Name": "lineage4.10",
+                "Coverage": 100,
+                "Median Depth": 104
+            }
+        ]
+    },
+    "Genomes": [
+        {
+            "Name": "M. tuberculosis",
+            "Sequencing Quality": {
+                "Mapped To": "M. tuberculosis (H37Rv v3) NC_000962.3",
+                "Num Reads": 2564607,
+                "Coverage": 98.4642,
+                "Mean Depth": 83.162,
+                "Mixed calls": 232,
+                "Null calls": 67751,
+                "Reference genome length": 4411532
+            },
+            "Resistance Prediction": {
+                "Resistance Prediction Summary": {
+                    "First-line treatment": {
+                        "Isoniazid (INH)": "U",
+                        "Rifampicin (RIF)": "S",
+                        "Pyrazinamide (PZA)": "S",
+                        "Ethambutol (EMB)": "S"
+                    },
+                    "Second-line treatment": {
+                        "Moxifloxacin (MXF)": "U",
+                        "Levofloxacin (LEV)": "U",
+                        "Linezolid (LZD)": "U",
+                        "Bedaquiline (BDQ)": "S"
+                    },
+                    "Reserve treatment": {
+                        "Amikacin (AMI)": "S",
+                        "Kanamycin (KAN)": "S",
+                        "Streptomycin (STM)": "S",
+                        "Capreomycin (CAP)": "S",
+                        "Ethionamide (ETH)": "R",
+                        "Delamanid (DLM)": "S"
+                    }
+                },
+                "Resistance Prediction Detail": [
+                    {
+                        "Drug Name": "ETH",
+                        "Mutations": [
+                            {
+                                "Gene": "ethA",
+                                "Mutation": "1136_del_a",
+                                "Position": 1136,
+                                "Ref": "",
+                                "Alt": "",
+                                "Coverage": [
+                                    0,
+                                    91
+                                ],
+                                "Prediction": "R",
+                                "Evidence": {
+                                    "Observed_samples": {
+                                        "Present_SOLO_SR": 1291,
+                                        "Present_SOLO_R": 658,
+                                        "Present_SOLO_S": 633
+                                    },
+                                    "Additional grading criteria applied": null,
+                                    "FINAL CONFIDENCE GRADING": "1) Assoc w R",
+                                    "INITIAL CONFIDENCE GRADING": "1) Assoc w R",
+                                    "WHO HGVS": "ethA_LoF"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "Drug Name": "INH",
+                        "Mutations": [
+                            {
+                                "Gene": "katG",
+                                "Mutation": "D215E",
+                                "Position": 215,
+                                "Ref": "gat",
+                                "Alt": "gag",
+                                "Coverage": [
+                                    0,
+                                    49
+                                ],
+                                "Prediction": "U",
+                                "Evidence": {
+                                    "reporting_rule": "True"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "Drug Name": "LEV",
+                        "Mutations": [
+                            {
+                                "Gene": "gyrB",
+                                "Mutation": "V457I",
+                                "Position": 457,
+                                "Ref": "gtc",
+                                "Alt": "atc",
+                                "Coverage": [
+                                    0,
+                                    107
+                                ],
+                                "Prediction": "U",
+                                "Evidence": {
+                                    "reporting_rule": "True"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "Drug Name": "LZD",
+                        "Mutations": [
+                            {
+                                "Gene": "rrl",
+                                "Mutation": "c637g",
+                                "Position": 637,
+                                "Ref": "c",
+                                "Alt": "g",
+                                "Coverage": [
+                                    0,
+                                    105
+                                ],
+                                "Prediction": "U",
+                                "Evidence": {
+                                    "reporting_rule": "True"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "Drug Name": "MXF",
+                        "Mutations": [
+                            {
+                                "Gene": "gyrB",
+                                "Mutation": "V457I",
+                                "Position": 457,
+                                "Ref": "gtc",
+                                "Alt": "atc",
+                                "Coverage": [
+                                    0,
+                                    107
+                                ],
+                                "Prediction": "U",
+                                "Evidence": {
+                                    "reporting_rule": "True"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ],
+    "Metadata": {
+        "Pipeline build": "149a518",
+        "Reference Data Files": {
+            "manifest": "manifest_20231001",
+            "species_list": "species_list_manifest_20240710.csv",
+            "name_mapping": "competitive_mapping_mykrobe_names_20241105.csv",
+            "ref_files": "Ref_prepare",
+            "tb_ref_genome": "NC_000962.3.gbk",
+            "tb_amr_cat": "NC_000962.3_WHO-UCN-TB-2023.5_v2.0_GARC1_RFUS.csv",
+            "sundial_ref": "h37rv_20231215.fa.gz"
+        }
+    }
+}
