@@ -143,13 +143,36 @@ def build_genetics_table(
         # check to see if the same has the 'Assembled NTM Results' block in the main report
         species_name = None
 
-        if master_table.at[uid, "has_new_block_in_main_report"]:
-            sn = species_table.at[uid, "SPECIES_NAME"]
-            if isinstance(sn, str):
-                if sn.replace(" ", "_") in filepath.stem:
-                    species_name = sn
+        rows = species_table.loc[uid]
+
+        if isinstance(rows, pandas.Series):
+            species_name = rows["SPECIES_NAME"]
         else:
-            species_name = species_table.at[uid, "SPECIES_NAME"]
+            if master_table.at[uid, "has_new_block_in_main_report"]:
+                matches = rows[
+                    rows["SPECIES_NAME"]
+                    .astype("string")
+                    .fillna("")
+                    .str.replace(" ", "_")
+                    .apply(lambda s: s in filepath.stem)
+                ]
+
+                if len(matches) == 1:
+                    species_name = matches.iloc[0]["SPECIES_NAME"]
+                elif len(matches) == 0:
+                    raise ValueError(f"UID {uid}: no species row matches {filepath.name}")
+                else:
+                    raise ValueError(
+                        f"UID {uid}: multiple species rows match {filepath.name}"
+                    )
+            else:
+                unique_species = rows["SPECIES_NAME"].dropna().astype("string").unique()
+                if len(unique_species) == 1:
+                    species_name = unique_species[0]
+                else:
+                    raise ValueError(
+                        f"UID {uid}: conflicting species rows without mixed-infection flag"
+                    )
         
         if species_name is None:
             raise ValueError(f"UID {uid} does not have species name in species table")
@@ -199,7 +222,6 @@ def build_genetics_table(
         tables_df = tables_df.rename(columns={'uniqueid': 'run_accession'})
         tables_df = tables_df.rename(columns=str.upper)
         tables_df.set_index(
-        df.set_index(
             [
                 "RUN_ACCESSION",
                 "SPECIES_NAME",

@@ -166,9 +166,11 @@ def build_species_table(
                 row.append(data["Mycobacterium Results"]["Summary"][sn]["Num Reads"])
                 row.append(data["Mycobacterium Results"]["Summary"][sn]["Coverage"])
                 row.append(data["Mycobacterium Results"]["Summary"][sn]["Depth"])
-                lineage, sublineage = parse_lineage(
-                    data["Mycobacterium Results"]["Lineage"][sn]
-                )
+                lineages = data["Mycobacterium Results"].get("Lineage", [])
+                if sn >= len(lineages):
+                    lineage, sublineage = "", ""
+                else:
+                    lineage, sublineage = parse_lineage(lineages[sn])
             row.append(lineage)
             row.append(sublineage)
             tables.append(row)

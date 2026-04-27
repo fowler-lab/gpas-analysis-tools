@@ -115,7 +115,7 @@ def main():
     defopt.run(
         [build_tables, correct_tables],
         no_negated_flags=True,
-        strict_kwonly="False",
+        strict_kwonly=False,
         short={},
     )
 
